@@ -1,29 +1,29 @@
 class CashRegister
-  attr_accessor :total, :discount, :price, :items
+  attr_accessor :total, :ee_discount, :price, :items
 
-  def initialize(discount = 0)
+  def initialize(ee_discount = 0)
     @total = 0
-    @discount = discount
-    @items = []
+    @ee_discount = discount
+    @items_in_cart = []
   end
 
-  def add_item(item, price, quantity = 1)
-    @price = price
-    @total += price * quantity
-    if quantity > 1
+  def add_item(item, item_price, item_quantity = 1)
+    @item_price = item_price
+    @total += item_price * item_quantity
+    if item_quantity > 1
       counter = 0
-      while counter < quantity
-        @items << item
+      while counter < item_quantity
+        @items_in_cart << item
         counter += 1
       end
     else
-      @items << item
+      @items_in_cart << item
     end
   end
 
   def apply_discount
-    if @discount > 0
-      @take_off = (price * discount)/100
+    if @ee_discount > 0
+      @take_off = (item_price * ee_discount)/100
       @total -= @take_off
       return "After the discount, the total comes to $#{total}."
     else
